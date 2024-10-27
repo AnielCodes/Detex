@@ -2,6 +2,7 @@ import './App.css'
 import Header from './BasicComponents/Header'
 import Footer from './BasicComponents/Footer'
 import Carousel from './BasicComponents/Carousel'
+import ProductCards from './BasicComponents/ProductCards'
 
 function App() { 
   const images = [
@@ -14,6 +15,7 @@ function App() {
   <>
   <Header />
   <Carousel images={images}/>
+  <ProductCards />
   <Footer />
   </>
 )}

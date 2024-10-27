@@ -30,7 +30,7 @@ const Carousel: React.FC<CarouselProps> = ({ images }) => {
         <img
           src={images[currentIndex]}
           alt={`Slide ${currentIndex + 1}`}
-          className="w-full h-64 sm:h-96 object-cover transition-transform duration-500 rounded-lg"
+          className="w-full h-64 sm:h-96 object-contain transition-transform duration-500 rounded-lg"
         />
       </div>
 
