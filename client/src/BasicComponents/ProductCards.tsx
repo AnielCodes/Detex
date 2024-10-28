@@ -1,91 +1,71 @@
-// src/components/ProductCards.tsx
-import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
-import EasykitLogo from "../assets/EasyKit.png";
-import RyobiLogo from "../assets/Ryobi.png";
-import A019 from "../assets/AO19-1.png";
+// src/components/Carousel.tsx
 
-const ProductCards: React.FC = () => {
-  //Product object.
-  const products = [
-    {
-      name: "AO19",
-      productImg: A019,
-      image:
-        "https://www.detex.com/wp-content/uploads/Logos/AO19-Series-%C2%AE-Logo.jpg",
-      features: [
-        "Economical operator provides safe and easy access in medium to high-traffic and security areas",
-        "Provides ADA compliant access to handicap applications",
-        "Hanger plate allows quick installation",
-        "Adjustable delayed activation for sequenced vestibule doors",
-        "Reverse on obstruction stalls a door during closing cycle and re-activates to open if an obstruction is sensed anytime before the latch position",
-        "Power close applies a reverse power to aid in latch check position",
-      ],
-      price: "$49.99",
-    },
-    {
-      name: "EasyKit",
-      productImg: A019,
-      image: EasykitLogo,
-      features: ["Feature A", "Feature B", "Feature C"],
-      price: "$59.99",
-    },
-    {
-      name: "Ryobi",
-      productImg: A019,
-      image: RyobiLogo,
-      features: ["Feature X", "Feature Y", "Feature Z"],
-      price: "$69.99",
-    },
-  ];
+import React, { useState, useEffect } from 'react';
+
+interface CarouselProps {
+  images: string[];
+}
+
+const Carousel: React.FC<CarouselProps> = ({ images }) => {
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
+
+  const goToPrevious = () => {
+    setCurrentIndex(currentIndex === 0 ? images.length - 1 : currentIndex - 1);
+  };
+
+  const goToNext = () => {
+    setCurrentIndex(currentIndex === images.length - 1 ? 0 : currentIndex + 1);
+  };
+
+  // Automatically go to the next slide every 10 seconds
+  useEffect(() => {
+    const interval = setInterval(goToNext, 10000);
+    return () => clearInterval(interval);
+  }, [currentIndex]);
 
   return (
-    <div className="flex justify-center items-center my-10">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-3/4">
-        {products.map((product, index) => (
+    <div className="relative max-w-screen-md mx-auto p-4">
+      {/* Carousel Images */}
+      <div className="overflow-hidden shadow-lg max-w-full mx-auto">
+        <img
+          src={images[currentIndex]}
+          alt={`Slide ${currentIndex + 1}`}
+          className="w-full h-64 sm:h-96 object-contain transition-transform duration-500 rounded-lg"
+        />
+      </div>
+
+      {/* Previous Button */}
+      <button
+        onClick={goToPrevious}
+        className="absolute top-1/2 transform -translate-y-1/2 left-4 text-white bg-black bg-opacity-50 p-2 rounded-full hover:bg-opacity-75 transition"
+      >
+        ‹
+      </button>
+
+      {/* Next Button */}
+      <button
+        onClick={goToNext}
+        className="absolute top-1/2 transform -translate-y-1/2 right-4 text-white bg-black bg-opacity-50 p-2 rounded-full hover:bg-opacity-75 transition"
+      >
+        ›
+      </button>
+
+      {/* Indicators */}
+      <div className="flex justify-center mt-4 space-x-2">
+        {images.map((_, index) => (
           <div
             key={index}
-            className="bg-white shadow-lg p-6 text-center transform transition duration-300 hover:scale-105"
-          >
-            <img src={product.productImg}></img>
-            {/* Product Image */}
-            <img
-              src={product.image}
-              alt={product.name}
-              className="max-w-30 max-h-20 mb-4 justify-self-center"
-            />
-
-            {/* Features List */}
-            <ul className="space-y-2 mb-6 text-gray-600">
-              {product.features.map((feature, idx) => (
-                <li
-                  key={idx}
-                  className="flex items-center justify-center space-x-2"
-                >
-                  <FontAwesomeIcon
-                    icon={faCheckCircle}
-                    className="text-green-500"
-                  />
-                  <span>{feature}</span>
-                </li>
-              ))}
-            </ul>
-
-            {/* Price */}
-            <p className="text-xl font-bold text-gray-700 mb-6">
-              {product.price}
-            </p>
-
-            {/* Button */}
-            <button className="px-4 py-2 rounded-full bg-blue-500 text-white font-medium hover:bg-blue-600 transition">
-              Buy Now
-            </button>
-          </div>
+            onClick={() => setCurrentIndex(index)}
+            className={`h-2 w-2 rounded-full cursor-pointer ${
+              index === currentIndex ? 'bg-gray-800' : 'bg-gray-400'
+            }`}
+          ></div>
         ))}
       </div>
     </div>
   );
 };
+
+export default Carousel;
 
 export default ProductCards;
