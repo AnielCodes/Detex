@@ -1,7 +1,12 @@
-import React, { useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronDown, faSearch, faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
-import detexLogo from '../assets/Detex-logo.webp';
+import React, { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faChevronDown,
+  faSearch,
+  faBars,
+  faTimes,
+} from "@fortawesome/free-solid-svg-icons";
+import detexLogo from "../assets/Detex-logo.webp";
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -19,7 +24,10 @@ const Header: React.FC = () => {
 
       {/* Hamburger Menu Icon for Mobile */}
       <div className="lg:hidden flex items-center">
-        <button onClick={toggleMenu} className="text-white hover:text-gray-400 focus:outline-none z-50">
+        <button
+          onClick={toggleMenu}
+          className="text-white hover:text-gray-400 focus:outline-none z-50"
+        >
           <FontAwesomeIcon icon={isMenuOpen ? faTimes : faBars} size="lg" />
         </button>
       </div>
@@ -27,12 +35,14 @@ const Header: React.FC = () => {
       {/* Menu and Search Section */}
       <nav
         className={`${
-          isMenuOpen ? 'block' : 'hidden'
+          isMenuOpen ? "block" : "hidden"
         } lg:flex lg:items-center lg:space-x-8 absolute lg:static bg-black top-16 left-0 w-full lg:w-auto lg:bg-transparent transition-all duration-300 z-50`}
       >
         <ul className="lg:flex lg:space-x-8 text-white space-y-4 lg:space-y-0 p-4 lg:p-0">
           <li>
-            <a href="#home" className="hover:text-gray-400 block">Home</a>
+            <a href="#home" className="hover:text-gray-400 block">
+              Home
+            </a>
           </li>
 
           {/* About Dropdown */}
@@ -43,13 +53,19 @@ const Header: React.FC = () => {
             </button>
             <ul className="absolute hidden group-hover:block top-10 left-0 bg-gray-800 text-white rounded shadow-lg py-2 z-50">
               <li className="px-4 py-2 hover:bg-gray-700">
-                <a href="#team" className="block">Our Team</a>
+                <a href="#team" className="block">
+                  Our Team
+                </a>
               </li>
               <li className="px-4 py-2 hover:bg-gray-700">
-                <a href="#mission" className="block">Our Mission</a>
+                <a href="#mission" className="block">
+                  Our Mission
+                </a>
               </li>
               <li className="px-4 py-2 hover:bg-gray-700">
-                <a href="#history" className="block">History</a>
+                <a href="#history" className="block">
+                  History
+                </a>
               </li>
             </ul>
           </li>
@@ -62,25 +78,36 @@ const Header: React.FC = () => {
             </button>
             <ul className="absolute hidden group-hover:block top-10 left-0 bg-gray-800 text-white rounded shadow-lg py-2 z-50">
               <li className="px-4 py-2 hover:bg-gray-700">
-                <a href="#consulting" className="block">Consulting</a>
+                <a href="#consulting" className="block">
+                  Consulting
+                </a>
               </li>
               <li className="px-4 py-2 hover:bg-gray-700">
-                <a href="#support" className="block">Support</a>
+                <a href="#support" className="block">
+                  Support
+                </a>
               </li>
               <li className="px-4 py-2 hover:bg-gray-700">
-                <a href="#customization" className="block">Customization</a>
+                <a href="#customization" className="block">
+                  Customization
+                </a>
               </li>
             </ul>
           </li>
 
           <li>
-            <a href="#contact" className="hover:text-gray-400 block">Contact</a>
+            <a href="#contact" className="hover:text-gray-400 block">
+              Contact
+            </a>
           </li>
         </ul>
 
         {/* Search Icon and Input */}
         <div className="relative flex items-center lg:ml-4 p-4 lg:p-0">
-          <button onClick={toggleSearchBar} className="text-white hover:text-gray-400">
+          <button
+            onClick={toggleSearchBar}
+            className="text-white hover:text-gray-400"
+          >
             <FontAwesomeIcon icon={faSearch} />
           </button>
 
@@ -89,7 +116,7 @@ const Header: React.FC = () => {
             type="text"
             placeholder="Search..."
             className={`transition-all duration-300 ease-in-out ${
-              isSearchOpen ? 'w-48 opacity-100 ml-2' : 'w-0 opacity-0'
+              isSearchOpen ? "w-48 opacity-100 ml-2" : "w-0 opacity-0"
             } p-2 bg-gray-800 text-white rounded-full focus:outline-none`}
           />
         </div>
@@ -99,4 +126,3 @@ const Header: React.FC = () => {
 };
 
 export default Header;
-
