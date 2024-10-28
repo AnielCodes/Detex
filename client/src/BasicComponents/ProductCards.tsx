@@ -7,6 +7,8 @@ import Auto from '../assets/AO19-1.png';
 import Ryobi from '../assets/D4550.png';
 import EasyImg from '../assets/EasyImg.png';
 
+//test
+
 const ProductCards: React.FC = () => {
   const products = [
     {
