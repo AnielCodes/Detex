@@ -1,71 +1,99 @@
-// src/components/Carousel.tsx
+import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
+import EasykitLogo from '../assets/EasyKit.png';
+import RyobiLogo from '../assets/Ryobi.png';
+import Auto from '../assets/AO19-1.png';
+import Ryobi from '../assets/D4550.png';
+import EasyImg from '../assets/EasyImg.png';
 
-import React, { useState, useEffect } from 'react';
+//test
 
-interface CarouselProps {
-  images: string[];
-}
-
-const Carousel: React.FC<CarouselProps> = ({ images }) => {
-  const [currentIndex, setCurrentIndex] = useState<number>(0);
-
-  const goToPrevious = () => {
-    setCurrentIndex(currentIndex === 0 ? images.length - 1 : currentIndex - 1);
-  };
-
-  const goToNext = () => {
-    setCurrentIndex(currentIndex === images.length - 1 ? 0 : currentIndex + 1);
-  };
-
-  // Automatically go to the next slide every 10 seconds
-  useEffect(() => {
-    const interval = setInterval(goToNext, 10000);
-    return () => clearInterval(interval);
-  }, [currentIndex]);
+const ProductCards: React.FC = () => {
+  const products = [
+    {
+      name: 'AO19',
+      imageProduct: Auto,
+      image: 'https://www.detex.com/wp-content/uploads/Logos/AO19-Series-%C2%AE-Logo.jpg',
+      features: [
+        'Economical operator provides safe and easy access in medium to high-traffic and security areas',
+        'Provides ADA compliant access to handicap applications',
+        'Hanger plate allows quick installation',
+        'Adjustable delayed activation for sequenced vestibule doors',
+        'Reverse on obstruction stalls a door during closing cycle and re-activates to open if an obstruction is sensed anytime before the latch position',
+        'Power close applies a reverse power to aid in latch check position',
+      ],
+      position: { top: '-50px', left: '0px' }, // unique position
+    },
+    {
+      name: 'EasyKit',
+      imageProduct: EasyImg,
+      image: EasykitLogo,
+      features: ['All hardware items provided with one easy-to-order, easy-to-specify part number', 'Factory-programmed, pre-wired delayed egress controller / power supply', '10 ft. flex conduit loop', 'Code-compliant delayed egress signage', 'Fire Alarm override connected at controller / power supply', 'Heavy-duty angled end cap deflects damage away from panic device', 'System does not require magnetic lock, panic provides delayed exit'],
+      position: { top: '-90px', right: '20px', left: '0px' , height: '300px'}, // unique position
+    },
+    {
+      name: 'Ryobi',
+      imageProduct: Ryobi,
+      image: RyobiLogo,
+      features: ['Full hydraulic checking controls the door through the full opening and closing cycles', 'Adjustable backcheck upon opening and adjustable general and latch speeds through closing cycle', 'Heavy duty forged arms are interchangeable', 'Adjustable Delayed-Action speed through closing cycle', 'Many heavy duty and extra heavy duty configurations available'],
+      position: { top: '-100px', left: '120px', height: '300px'}, // unique position
+    },
+  ];
 
   return (
-    <div className="relative max-w-screen-md mx-auto p-4">
-      {/* Carousel Images */}
-      <div className="overflow-hidden shadow-lg max-w-full mx-auto">
-        <img
-          src={images[currentIndex]}
-          alt={`Slide ${currentIndex + 1}`}
-          className="w-full h-64 sm:h-96 object-contain transition-transform duration-500 rounded-lg"
-        />
-      </div>
-
-      {/* Previous Button */}
-      <button
-        onClick={goToPrevious}
-        className="absolute top-1/2 transform -translate-y-1/2 left-4 text-white bg-black bg-opacity-50 p-2 rounded-full hover:bg-opacity-75 transition"
-      >
-        ‹
-      </button>
-
-      {/* Next Button */}
-      <button
-        onClick={goToNext}
-        className="absolute top-1/2 transform -translate-y-1/2 right-4 text-white bg-black bg-opacity-50 p-2 rounded-full hover:bg-opacity-75 transition"
-      >
-        ›
-      </button>
-
-      {/* Indicators */}
-      <div className="flex justify-center mt-4 space-x-2">
-        {images.map((_, index) => (
+    <div className="flex justify-center items-center my-10">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-3/4">
+        {products.map((product, index) => (
           <div
             key={index}
-            onClick={() => setCurrentIndex(index)}
-            className={`h-2 w-2 rounded-full cursor-pointer ${
-              index === currentIndex ? 'bg-gray-800' : 'bg-gray-400'
-            }`}
-          ></div>
+            className="relative bg-white shadow-lg p-6 text-center transform transition duration-300 hover:scale-105 rounded-lg"
+          >
+            {/* Product Image with Unique Position */}
+            <div className="h-44 relative">
+              <img
+                src={product.imageProduct}
+                alt={product.name}
+                style={{
+                  position: 'absolute',
+                  top: product.position.top,
+                  left: product.position.left,
+                  right: product.position.right,
+                  height: product.position .height
+                }}
+                className="object-scale-down"
+              />
+            </div>
+
+            {/* Logo Image */}
+            <img
+              src={product.image}
+              alt={product.name}
+              className="max-w-30 max-h-20 mb-4 mx-auto"
+            />
+
+            {/* Product Name */}
+            <h2 className="text-2xl font-semibold text-gray-800 mb-4">{product.name}</h2>
+
+            {/* Features List */}
+            <ul className="space-y-2 mb-6 text-gray-600">
+              {product.features.map((feature, idx) => (
+                <li key={idx} className="flex justify-left space-x-2 text-wrap">
+                  <FontAwesomeIcon icon={faCheckCircle} className="text-green-500" />
+                  <span>{feature}</span>
+                </li>
+              ))}
+            </ul>
+
+            {/* Button */}
+            <button className="px-4 py-2 rounded-full bg-red-600 text-white font-medium hover:bg-black transition">
+              Learn More
+            </button>
+          </div>
         ))}
       </div>
     </div>
   );
 };
-
-export default Carousel;
 
 export default ProductCards;
