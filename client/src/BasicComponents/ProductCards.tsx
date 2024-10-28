@@ -7,6 +7,7 @@ import RyobiLogo from "../assets/Ryobi.png";
 import A019 from "../assets/AO19-1.png";
 
 const ProductCards: React.FC = () => {
+  //Product object.
   const products = [
     {
       name: "AO19",
