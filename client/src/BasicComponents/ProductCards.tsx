@@ -1,5 +1,3 @@
-// src/components/ProductCards.tsx
-
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
@@ -8,7 +6,6 @@ import RyobiLogo from '../assets/Ryobi.png';
 import Auto from '../assets/AO19-1.png';
 import Ryobi from '../assets/D4550.png';
 import EasyImg from '../assets/EasyImg.png';
-import { width } from '@fortawesome/free-brands-svg-icons/fa42Group';
 
 const ProductCards: React.FC = () => {
   const products = [
